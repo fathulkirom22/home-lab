@@ -75,7 +75,7 @@ services:
     user: "1000:1000" # UID:GID yang sama
     network_mode: "host"
     ports:
-      - "8083:8096"
+      - "8084:8096"
       - "8920:8920"  # SSL jika diaktifkan
     volumes:
       - ./jellyfin-config:/config
@@ -95,9 +95,9 @@ services:
     image: traefik:v2.10
     restart: always
     ports:
-      - "8084:80"    # HTTP
+      - "8085:80"    # HTTP
       - "443:443"  # HTTPS
-      - "8085:8080" # Dashboard
+      - "8086:8080" # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # Untuk membaca label Docker
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
