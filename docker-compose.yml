@@ -68,21 +68,21 @@ services:
     depends_on:
       - nextcloud
 
-  # http://localhost:8083
+  # http://localhost:8096
   jellyfin:
     image: jellyfin/jellyfin:latest
     restart: always
     user: "1000:1000" # UID:GID yang sama
     network_mode: "host"
     ports:
-      - "8084:8096"
+      - "8096:8096"
       - "8920:8920"  # SSL jika diaktifkan
     volumes:
       - ./jellyfin-config:/config
       - ./jellyfin-cache:/cache
       - ./data:/media:cached
     environment:
-      - JELLYFIN_HTTP_PORT=8084
+      # - JELLYFIN_HTTP_PORT=8084
       - JELLYFIN_PublishedServerUrl=192.168.1.100 # IP lokal host
     labels:
       - "traefik.enable=true"
