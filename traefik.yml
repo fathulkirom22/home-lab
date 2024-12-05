@@ -1,0 +1,29 @@
+api:
+  dashboard: true  # Aktifkan dashboard Traefik
+  insecure: true   # Nonaktifkan ini di lingkungan produksi
+
+entryPoints:
+  web:
+    address: ":80"  # Entry point untuk HTTP
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"  # Entry point untuk HTTPS (opsional)
+    http:
+      tls:
+        certResolver: myresolver  # Resolver untuk Let's Encrypt
+
+providers:
+  docker:
+    exposedByDefault: false  # Hanya container dengan label yang akan diproxy
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: kirom222@gmail.com  # Ganti dengan email Anda
+      storage: /acme.json
+      httpChallenge:
+        entryPoint: web
